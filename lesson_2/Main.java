@@ -1,7 +1,7 @@
 package geekbrains.java.dubovik;
 
-import java.sql.SQLOutput;
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class Main {
 
@@ -29,12 +29,24 @@ public class Main {
         System.out.print(Arrays.toString(checkArray));
         System.out.println(" - " + checkBalance(checkArray));
 
-       /* System.out.println("\nЗадание 7:");
+        System.out.println("\nЗадание 7:");
+        Scanner invalue = new Scanner(System.in);
+        System.out.print("Введите на сколько сдвинуть массив (положительное число - вправо, отрицательное - влево: ");
+        int inShift = invalue.nextInt();
         int[] newArray = {1, 5, 3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
-        int shift = 3;
-        System.out.println("Массив - " + Arrays.toString(newArray));
-        System.out.print("Сдвиг: " + shift + " - ");
-        shiftArray(newArray, shift);*/
+        int shift;
+        String direct;
+        if (inShift > 0) {
+            direct = "--->>";
+            shift = inShift;
+        }
+        else {
+            direct = "<<---";
+            shift = newArray.length + inShift;
+        }
+        System.out.println("Начальный массив - " + Arrays.toString(newArray));
+        System.out.print("Сдвиг " + direct + " на " + Math.abs(inShift) + " - ");
+        shiftArray(newArray, shift);
     }
 
     public static void inverseValue() {
@@ -74,7 +86,7 @@ public class Main {
             System.out.println();
         }
     }
-    
+
     public static void minmaxValue() {
         int[] minmaxArray = {12, 5, -3, 2, 11, 4, 5, 2, 4, 8, 9, 1};
         System.out.println(Arrays.toString(minmaxArray));
@@ -104,18 +116,17 @@ public class Main {
         return res;
     }
 
-    /*public static void shiftArray(int[] arrays, int shifter) {
-        System.out.println(Arrays.toString(arrays));
-        int mindNum;
+    public static void shiftArray(int[] arrays, int shifter) {
+        int mindNum1, mindNum2;
         for (int s = 1; s <= shifter; s++) {
-            mindNum = arrays[0];
+            mindNum1 = arrays[0];
             for (int i = 0; i < arrays.length-1; i++) {
-
-                arrays[i+1] = mindNum;
-
+                mindNum2 = arrays[i+1];
+                arrays[i+1] = mindNum1;
+                mindNum1 = mindNum2;
             }
-            arrays[0] = mindNum;
+            arrays[0] = mindNum1;
         }
         System.out.println(Arrays.toString(arrays));
-    }*/
+    }
 }
