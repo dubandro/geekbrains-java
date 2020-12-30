@@ -42,7 +42,7 @@ public class Main {
         }
         else {
             direct = "<<---";
-            shift = newArray.length + inShift;
+            shift = Math.abs(newArray.length + inShift);
         }
         System.out.println("Начальный массив - " + Arrays.toString(newArray));
         System.out.print("Сдвиг " + direct + " на " + Math.abs(inShift) + " - ");
