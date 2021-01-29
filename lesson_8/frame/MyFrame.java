@@ -112,6 +112,13 @@ public class MyFrame extends JFrame {
             }
         });
 
+        buttonSquare.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                action(e);
+            }
+        });
+
         buttonPoint.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -190,10 +197,12 @@ public class MyFrame extends JFrame {
     private void calculating(ActionEvent e) {
         String text = textField.getText();
         String digit = "";
+        double currentValue;
+
         for (int i = 0; i < text.length(); i++) {
             char c = text.charAt(i);
-            if (c == '-' || c == '+' || c == '\u00D7' || c == '\u00F7') {
-                double currentValue = Double.parseDouble(digit);
+            if (c == '-' || c == '+' || c == '\u00D7' || c == '\u00F7' || c == '\u00B2') {
+                currentValue = Double.parseDouble(digit);
                 if (isFirstDigit) {
                     total += currentValue;
                     isFirstDigit = false;
@@ -209,7 +218,8 @@ public class MyFrame extends JFrame {
             digit += c;
         }
 
-        double currentValue = Double.parseDouble(digit);
+        if (operation == '\u00B2') currentValue = total;
+            else currentValue = Double.parseDouble(digit);
         operation(operation, currentValue);
 
         isFirstDigit = true;
@@ -227,6 +237,7 @@ public class MyFrame extends JFrame {
                 total += currentValue;
                 break;
             case '\u00D7':
+            case '\u00B2':
                 total = total * currentValue;
                 break;
             case '\u00F7':
@@ -277,6 +288,7 @@ public class MyFrame extends JFrame {
                 break;
 
             default:
+                if (e.equals("x\u00B2")) e = "\u00B2";
                 if (isLastDigit) {
                     textField.setText(textField.getText() + e);
                 }
